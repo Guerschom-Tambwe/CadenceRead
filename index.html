@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CadenceRead</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="top">
+      <div>
+        <h1>CadenceRead</h1>
+        <p class="sub">Measure reading pace &amp; clarity in real time.</p>
+      </div>
+    </header>
+
+    <section class="controls" aria-label="Editor Controls">
+      <label for="wpm-select" class="ctrl-label">
+        Speed:
+        <select id="wpm-select">
+          <option value="180">180 WPM</option>
+          <option value="230" selected>230 WPM</option>
+          <option value="300">300 WPM</option>
+        </select>
+      </label>
+    </section>
+
+    <label for="draft-input" class="field-label">Your Draft</label>
+    <textarea id="draft-input" rows="5" placeholder="Paste or type a paragraph...">Good software feels effortless to use. Short, rhythmic sentences help readers grasp complex ideas faster.</textarea>
+
+    <section id="metrics-grid" class="grid" aria-label="Readability Metrics">
+      <article class="card"><span>Words</span><strong id="word-count">0</strong></article>
+      <article class="card"><span>Read Time</span><strong id="read-time">0s</strong></article>
+    </section>
+  </main>
+  <script src="./app.js"></script>
+</body>
+</html>
