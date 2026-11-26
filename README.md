@@ -1,17 +1,17 @@
 # CadenceRead
 
-> Reading pace, syllable & clarity analyzer for crisp technical writing.
+> RSVP speed reader with WPM pacing, word highlighting & focus controls.
 
 ## Overview
-Build CadenceRead: a responsive, accessible writing analyzer that counts words, estimates reading time, measures sentence cadence & syllables, and verifies core logic with console.assert() checks.
+Build CadenceRead: an accessible Rapid Serial Visual Presentation (RSVP) speed reader that tokenizes text, flashes one word at a time at a configurable WPM pace, tracks progress, and verifies core logic with console.assert().
 
 ## Tech Stack
 - **Stack:** HTML / CSS / JS
 
 ## Key Features & Milestones
-- [x] **Word Counter, Read Time & Assertions** — Implement countWords(text) and formatReadTime(words, wpm), wire live input events, and pass your first console.assert() checks.
-- [ ] **Sentence Cadence & Syllable Heuristic** — Add sentence counting, syllable estimation, and a live pace badge (Crisp / Balanced / Dense).
-- [ ] **Sample Presets, Clear Action & Touch Polish** — Add Load Sample and Clear buttons with 44px touch targets, focus outlines, and zero A11y warnings.
+- [x] **Tokenizer, WPM Interval & Assertions** — Implement tokenizeText(text) and wpmToMs(wpm), render the current word, and pass Milestone 1 assertions.
+- [ ] **Progress Bar & Pivot Letter Highlight** — Highlight the focal pivot character of each word and display a live reading progress bar.
+- [ ] **Reset Control, Keyboard Shortcuts & A11y Polish** — Add a Reset button (44px target), Spacebar Play/Pause shortcut, and verify 0 Overflow & 0 A11y warnings.
 
 ## Local Setup & Testing
 1. Clone the repository and open `index.html` in your browser (or start a static server):

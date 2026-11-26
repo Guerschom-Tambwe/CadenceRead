@@ -1,36 +1,59 @@
 // CadenceRead — Milestone 1 Starter
 const draftInput = document.getElementById("draft-input");
 const wpmSelect = document.getElementById("wpm-select");
-const wordCountEl = document.getElementById("word-count");
-const readTimeEl = document.getElementById("read-time");
+const wordEl = document.getElementById("rsvp-word");
+const counterEl = document.getElementById("word-counter");
+const playBtn = document.getElementById("play-btn");
 
-// TODO (M1): Return 0 for empty/whitespace strings, otherwise word count
-function countWords(text) {
-  const clean = (text || "").trim();
-  if (!clean) return 0;
-  return clean.split(/\s+/).length;
-  return 0;
+// TODO (M1): Return [] for empty/whitespace, otherwise array of words
+function tokenizeText(text) {
+const clean = (text || "").trim();
+  if (!clean) return [];
+  return clean.split(/\s+/);
+  return [];
 }
 
-function formatReadTime(words, wpm) {
-  if (!words) return "0s";
-  const sec = Math.ceil((words / wpm) * 60);
-  if (sec < 60) return sec + "s";
-  const m = Math.floor(sec / 60);
-  const s = sec % 60;
-  return s > 0 ? m + "m " + s + "s" : m + "m";
+// TODO (M1): Convert WPM to milliseconds per word (min 50ms)
+function wpmToMs(wpm) {
+  const rate = Number(wpm) || 300;
+  return Math.max(50, Math.round(60000 / rate));
 }
 
-function render() {
-  const words = countWords(draftInput ? draftInput.value : "");
-  const wpm = wpmSelect ? Number(wpmSelect.value) : 230;
-  if (wordCountEl) wordCountEl.textContent = String(words);
-  if (readTimeEl) readTimeEl.textContent = formatReadTime(words, wpm);
+let timerId = null;
+let words = [];
+let index = 0;
+
+function syncWords() {
+  words = tokenizeText(draftInput ? draftInput.value : "");
+  if (counterEl) counterEl.textContent = words.length + " words";
+  if (wordEl && !timerId) wordEl.textContent = words[0] || "Ready";
 }
 
-if (draftInput) draftInput.addEventListener("input", render);
-if (wpmSelect) wpmSelect.addEventListener("change", render);
+function togglePlay() {
+  if (timerId) {
+    clearInterval(timerId);
+    timerId = null;
+    if (playBtn) playBtn.textContent = "Play";
+    return;
+  }
+  syncWords();
+  if (!words.length) return;
+  index = 0;
+  if (playBtn) playBtn.textContent = "Pause";
+  timerId = setInterval(function() {
+    if (wordEl) wordEl.textContent = words[index];
+    index++;
+    if (index >= words.length) {
+      clearInterval(timerId);
+      timerId = null;
+      if (playBtn) playBtn.textContent = "Play";
+    }
+  }, wpmToMs(wpmSelect ? wpmSelect.value : 300));
+}
 
-window.countWords = countWords;
-window.formatReadTime = formatReadTime;
-render();
+if (draftInput) draftInput.addEventListener("input", syncWords);
+if (playBtn) playBtn.addEventListener("click", togglePlay);
+
+window.tokenizeText = tokenizeText;
+window.wpmToMs = wpmToMs;
+syncWords();

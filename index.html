@@ -9,27 +9,25 @@
 <body>
   <main class="shell">
     <header class="top">
-      <div>
-        <h1>CadenceRead</h1>
-        <p class="sub">Measure reading pace &amp; clarity in real time.</p>
-      </div>
+      <h1>CadenceRead</h1>
+      <span id="word-counter" class="badge" aria-live="polite">0 words</span>
     </header>
-    <section class="controls" aria-label="Editor Controls">
+    <section class="stage" aria-label="RSVP Reader Stage">
+      <div id="rsvp-word" class="word" aria-live="off">Ready</div>
+    </section>
+    <section id="controls-row" class="controls" aria-label="Reader Controls">
       <label for="wpm-select" class="ctrl-label">
         Speed:
         <select id="wpm-select">
-          <option value="180">180 WPM</option>
-          <option value="230" selected>230 WPM</option>
-          <option value="300">300 WPM</option>
+          <option value="200">200 WPM</option>
+          <option value="300" selected>300 WPM</option>
+          <option value="450">450 WPM</option>
         </select>
       </label>
+      <button id="play-btn" type="button" class="btn">Play</button>
     </section>
-    <label for="draft-input" class="field-label">Your Draft</label>
-    <textarea id="draft-input" rows="5">Good software feels effortless to use. Short, rhythmic sentences help readers grasp complex ideas faster.</textarea>
-    <section id="metrics-grid" class="grid" aria-label="Readability Metrics">
-      <article class="card"><span>Words</span><strong id="word-count">0</strong></article>
-      <article class="card"><span>Read Time</span><strong id="read-time">0s</strong></article>
-    </section>
+    <label for="draft-input" class="field-label">Passage to Read</label>
+    <textarea id="draft-input" rows="4">Fast reading starts with calm focus. One word at a time removes eye strain and builds rhythm.</textarea>
   </main>
   <script src="./app.js"></script>
 </body>
